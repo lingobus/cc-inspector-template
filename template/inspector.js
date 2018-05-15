@@ -1,4 +1,4 @@
-Vue.component('{{compName}}', {
+Vue.component('{{name}}', {
   template: `
     <ui-prop v-prop="target.propName"></ui-prop>
   `,
