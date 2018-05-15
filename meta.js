@@ -15,16 +15,18 @@ module.exports = {
       "label": "Author"
     }
   },
+  "helpers": {
+    "camelize": camelize
+  },
   "metalsmith": {
-    after:function (metalsmith, opts, helpers) {
+    after: function (metalsmith, opts, helpers) {
       metalsmith.use(function (files, metalsmith, done){
         const meta = metalsmith.metadata()
-        const compName = meta.compName = meta.name.replace(/^([a-z])|(-[a-z])/g, function (a) {
-          return a.replace('-','').toUpperCase()
-        })
+        const compName = meta.compName = camelize(meta.name)
         const val = files['inspector.js']
         delete files['inspector.js']
         files[compName + '-inspector.js'] = val
+        console.log(meta)
         done(null, files)
       })
     }
@@ -38,3 +40,9 @@ module.exports = {
 
     to your component!`
 };
+
+function camelize (str) {
+  return str.replace(/^([a-z])|(-[a-z])/g, function (a) {
+    return a.replace('-','').toUpperCase()
+  })
+}
