@@ -26,7 +26,6 @@ module.exports = {
         const val = files['inspector.js']
         delete files['inspector.js']
         files[compName + '-inspector.js'] = val
-        console.log(meta)
         done(null, files)
       })
     }
